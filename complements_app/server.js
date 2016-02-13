@@ -1,22 +1,14 @@
 // complements server 
 
 var express = require('express');
+var bodyParser = require('body-parser');
 var app = express();
 var PORT = process.env.PORT || 3330;
+var complementsNextId = 1; 
+var complements = [];
 
-var complements = [{
-    id: 1,
-    description: 'You look beautiful',
-    completed: false
-}, {
-    id: 2,
-    description: 'Miss you',
-    completed: false
-},{
-    id: 3,
-    description: 'Kises',
-    completed: true
-}];
+app.use(bodyParser.json());
+
 
 app.get('/', function (req, res) {
 	res.send('Complement API Root');
@@ -46,6 +38,20 @@ app.get('/complements/:id', function(req, res){
     }
     //res.send('Asking for todo with id of ' + req.params.id);
 });
+
+//POST /complements
+app.post('/complements', function(req, res){
+    var body = req.body;
+    // add id field 
+    body.id = complementsNextId;
+    complementsNextId ++;
+    // push body into array 
+    complements.push(body);
+    console.log('Description ' + body.description);
+    console.log('ID: ' + body.id)
+    res.json(body);
+});
+
 
 app.listen(PORT, function () {
 	console.log('Express listening on port ' + PORT + '!');
