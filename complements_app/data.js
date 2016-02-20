@@ -1,3 +1,5 @@
+
+
 var complements = [{
     id: 1,
     description: 'You look beautiful',
@@ -12,3 +14,13 @@ var complements = [{
     completed: true
 }];
 
+
+module.exports = complements;
+
+//module.exports = function(name, age) {
+//    this.name = name;
+//    this.age = age;
+//    this.about = function() {
+//        console.log(this.name +' is '+ this.age +' years old');
+//    };
+//};
