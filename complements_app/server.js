@@ -67,6 +67,21 @@ app.post('/complements', function(req, res){
     res.json(body);
 });
 
+// delete todo by ID   //:id
+app.delete('/complements/:id', function(req, res){
+    var complementId = parseInt(req.params.id, 10);
+    var matchedComplement = _.findWhere(complements, {id: complementId});
+    if(!matchedComplement){
+        res.status(404);
+//            .json("error": "no todo found with that id");
+    } else {
+        complements = _.without(complements, matchedComplement); 
+    }
+    res.json(matchedComplement);
+    console.log(matchedComplement);
+   
+});
+
 app.listen(PORT, function () {
 	console.log('Express listening on port ' + PORT + '!');
 });
